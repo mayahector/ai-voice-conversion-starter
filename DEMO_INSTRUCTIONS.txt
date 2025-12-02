@@ -1,0 +1,336 @@
+DEMO VIDEO INSTRUCTIONS
+========================
+
+This document provides step-by-step instructions for creating a comprehensive demo video
+of the Real-Time AI Voice Conversation application.
+
+PREPARATION
+-----------
+
+Before recording:
+1. Ensure both backend and frontend are running without errors
+2. Test microphone and audio output
+3. Clear browser cache and close unnecessary tabs
+4. Use a quiet environment for recording
+5. Prepare a script of what you'll say to the AI
+6. Have your code editor ready for code walkthrough
+
+
+PART 1: INTRODUCTION (30 seconds)
+----------------------------------
+
+1. Show the project folder structure in Finder/Explorer
+   - Highlight: frontend/, backend/, README.md, AI_PROMPTS.md
+
+2. Briefly explain the tech stack:
+   - "This is a real-time AI voice conversation app"
+   - "Built with Next.js, Express, LiveKit, and OpenAI"
+   - "Enables natural voice conversations with AI"
+
+
+PART 2: RUNNING THE PROJECT (1 minute)
+---------------------------------------
+
+1. Open Terminal/Command Prompt
+
+2. Split screen to show two terminal windows
+
+3. Terminal 1 - Start Backend:
+   $ cd backend
+   $ npm run dev
+   
+   - Show the startup logs:
+     ✅ Server running on http://localhost:3001
+     ✅ LiveKit URL configured
+     ✅ OpenAI API configured
+
+4. Terminal 2 - Start Frontend:
+   $ cd frontend
+   $ npm run dev
+   
+   - Show the startup logs:
+     ▲ Next.js running on http://localhost:3000
+
+5. Open browser to http://localhost:3000
+
+
+PART 3: LIVE DEMONSTRATION (2-3 minutes)
+-----------------------------------------
+
+1. Show the landing page:
+   - Point out the clean, modern UI
+   - Highlight the status indicators (disconnected, mic inactive)
+   - Show the instructions panel
+
+2. Click "Start Conversation"
+   - Show the browser microphone permission prompt
+   - Click "Allow"
+   - Show connection status changing: Connecting → Connected
+   - Show microphone status changing to "Active"
+
+3. First interaction:
+   - Say: "Hello! Can you hear me?"
+   - Wait for AI response
+   - Show transcript appearing in real-time:
+     * Your message (blue bubble, right side)
+     * AI response (gray bubble, left side)
+   - Let the AI voice play audibly
+
+4. Second interaction:
+   - Say: "Tell me a fun fact about space"
+   - Show transcript updating
+   - Demonstrate AI voice response
+
+5. Third interaction:
+   - Say: "What's the weather like on Mars?"
+   - Show the full conversation flow
+
+6. Demonstrate controls:
+   - Click "Mute Microphone" button
+   - Show mic status changing to "Inactive"
+   - Click "Unmute Microphone"
+   - Show mic status changing back to "Active"
+
+7. End conversation:
+   - Click "End Conversation"
+   - Show status changing to "Disconnected"
+   - Show transcript is preserved
+
+
+PART 4: CODE WALKTHROUGH (3-4 minutes)
+---------------------------------------
+
+Backend Code:
+
+1. Show backend/src/index.ts:
+   - Point out Express server setup
+   - Highlight CORS configuration
+   - Show environment variable validation
+   - Explain route registration
+
+2. Show backend/src/routes/token.ts:
+   - Explain LiveKit token generation
+   - Show how room names are created
+   - Highlight security (JWT tokens)
+
+3. Show backend/src/services/openai.ts:
+   - Explain the audio processing pipeline:
+     * transcribeAudio() - Whisper API
+     * generateResponse() - GPT-4 API
+     * textToSpeech() - TTS API
+   - Show the sequential flow
+
+4. Show backend/src/routes/ai.ts:
+   - Explain the /api/ai/process endpoint
+   - Show how audio data flows through the system
+
+Frontend Code:
+
+5. Show frontend/hooks/useLiveKit.ts:
+   - Explain the custom React hook
+   - Show connection logic (connect function)
+   - Highlight audio processing setup
+   - Show transcript state management
+
+6. Show frontend/components/ConversationRoom.tsx:
+   - Explain the main UI component
+   - Show button handlers
+   - Highlight state management
+
+7. Show frontend/components/StatusIndicator.tsx:
+   - Explain real-time status display
+   - Show animated indicators
+
+8. Show frontend/components/TranscriptDisplay.tsx:
+   - Explain chat-style transcript UI
+   - Show auto-scroll functionality
+
+
+PART 5: LIVEKIT CONNECTION FLOW (1 minute)
+-------------------------------------------
+
+1. Open browser DevTools (F12)
+
+2. Go to Console tab
+
+3. Start a new conversation
+
+4. Show the console logs:
+   - "Requesting token from backend..."
+   - "Token received, connecting to room..."
+   - "Connected to room"
+   - "Enabling microphone..."
+   - "Microphone enabled and published"
+
+5. Speak and show:
+   - "Transcription: [your words]"
+   - "AI Response: [AI's words]"
+
+6. Show Network tab:
+   - Filter for "api"
+   - Show POST /api/token request
+   - Show POST /api/ai/process requests
+   - Highlight response times
+
+
+PART 6: AI PROCESSING FLOW (1 minute)
+--------------------------------------
+
+1. Switch to backend terminal
+
+2. Show backend logs during a conversation:
+   - "Transcription: [user speech]"
+   - "AI Response: [generated text]"
+
+3. Explain the flow:
+   - Audio received from frontend
+   - Sent to OpenAI Whisper for transcription
+   - Transcription sent to GPT-4 for response
+   - Response sent to TTS for voice synthesis
+   - Audio returned to frontend
+
+
+PART 7: ENVIRONMENT CONFIGURATION (30 seconds)
+-----------------------------------------------
+
+1. Show backend/.env.example:
+   - Highlight required variables:
+     * LIVEKIT_API_KEY
+     * LIVEKIT_API_SECRET
+     * LIVEKIT_URL
+     * OPENAI_API_KEY
+
+2. Explain (without showing actual values):
+   - "These are configured in .env file"
+   - "Never commit .env to version control"
+   - "See README for setup instructions"
+
+
+PART 8: DOCUMENTATION (30 seconds)
+-----------------------------------
+
+1. Open README.md in a markdown viewer or VS Code preview
+
+2. Scroll through sections:
+   - Architecture diagram
+   - Setup instructions
+   - API endpoints
+   - Design decisions
+   - Known limitations
+
+3. Open AI_PROMPTS.md:
+   - Show the key prompts used
+   - Highlight lessons learned
+   - Show productivity metrics
+
+
+PART 9: PROJECT STRUCTURE (30 seconds)
+---------------------------------------
+
+1. Show folder structure in VS Code or file explorer:
+
+   TestProject/
+   ├── frontend/
+   │   ├── app/
+   │   ├── components/
+   │   ├── hooks/
+   │   └── package.json
+   ├── backend/
+   │   ├── src/
+   │   │   ├── routes/
+   │   │   ├── services/
+   │   │   └── index.ts
+   │   └── package.json
+   ├── README.md
+   ├── AI_PROMPTS.md
+   └── DEMO_INSTRUCTIONS.txt (this file)
+
+2. Explain the organization:
+   - Clean separation of frontend and backend
+   - TypeScript throughout
+   - Modular component structure
+
+
+PART 10: CLOSING (30 seconds)
+------------------------------
+
+1. Summarize key features:
+   ✅ Real-time voice conversation
+   ✅ AI-powered responses
+   ✅ Live transcription
+   ✅ Modern, responsive UI
+   ✅ Production-ready code
+   ✅ Comprehensive documentation
+
+2. Show final conversation:
+   - Say: "Thank you for watching this demo!"
+   - Let AI respond
+   - Wave goodbye 👋
+
+
+RECORDING TIPS
+--------------
+
+✅ Use screen recording software (OBS, QuickTime, etc.)
+✅ Record at 1080p or higher resolution
+✅ Enable microphone for narration
+✅ Speak clearly and at moderate pace
+✅ Pause between sections for editing
+✅ Show actual functionality, not just code
+✅ Demonstrate error handling (optional: try disconnecting internet)
+✅ Keep total video under 10 minutes
+
+❌ Don't rush through sections
+❌ Don't show actual API keys or secrets
+❌ Don't skip the live demo
+❌ Don't forget to show the AI responding
+
+
+OPTIONAL ADVANCED DEMONSTRATIONS
+---------------------------------
+
+If time permits, you can also show:
+
+1. Error Handling:
+   - Disconnect internet during conversation
+   - Show reconnection logic
+   - Show error messages in UI
+
+2. Multiple Conversations:
+   - End conversation
+   - Start new conversation
+   - Show new room is created
+
+3. Code Quality:
+   - Run: npm run lint
+   - Run: npm run build
+   - Show no errors
+
+4. Browser Compatibility:
+   - Test in Chrome
+   - Test in Firefox
+   - Show consistent behavior
+
+
+FINAL CHECKLIST
+----------------
+
+Before submitting the video, ensure you've shown:
+
+□ Project running locally
+□ Starting a conversation
+□ Speaking into microphone
+□ AI responding with voice
+□ Transcript display
+□ Backend token generation (logs)
+□ LiveKit connection events (console)
+□ AI processing flow (backend logs)
+□ Code walkthrough (backend)
+□ Code walkthrough (frontend)
+□ Documentation (README, AI_PROMPTS)
+□ Project structure
+
+
+ESTIMATED TOTAL TIME: 10-12 minutes
+
+Good luck with your demo! 🎥🚀
